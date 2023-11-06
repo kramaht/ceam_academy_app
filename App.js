@@ -1,22 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import LoginScreen from './src/screens/LoginScreen';
-import Constants from 'expo-constants';
-
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaView } from "react-native";
+import ButtonTabs from "./src/components/ui/ButtonTabs";
+import Constants from "expo-constants";
+import { NavigationContainer } from "@react-navigation/native";
+import { NativeBaseProvider } from "native-base";
+const LinearGradient = require("expo-linear-gradient").LinearGradient;
+const config = {
+  dependencies: {
+    "linear-gradient": LinearGradient,
+  },
+};
 export default function App() {
-
   return (
-    <SafeAreaView
-      style={{
-        marginTop: Constants.statusBarHeight,
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-      }}
-    >
-      <LoginScreen/>
-    </SafeAreaView>
+    <NativeBaseProvider config={config}>
+      <NavigationContainer>
+        <SafeAreaView
+          style={{
+            marginTop: Constants.statusBarHeight,
+            flex: 1,            
+          }}
+        >
+          <ButtonTabs />
+        </SafeAreaView>
+      </NavigationContainer>
+    </NativeBaseProvider>
   );
 }
-
-
