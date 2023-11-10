@@ -2,7 +2,6 @@ import { View, Text, TextInput } from "react-native";
 
 import { Input, Box } from "native-base";
 import React, { Fragment } from "react";
-
 import { useField } from "formik";
 
 export default function TextFieldStyled({
@@ -21,10 +20,12 @@ export default function TextFieldStyled({
         value={field.value}
         onChangeText={helpers.setValue}
         onBlur={helpers.setTouched}
-        placeholder={placeholder}        
+        placeholder={placeholder}
         {...rest}
       />
-      {meta.error && meta.touched && <Text>{meta.error}</Text>}
+      {meta.error && meta.touched && (
+        <Text style={{ color: "red" }}>{meta.error}</Text>
+      )}
     </Box>
   );
 }

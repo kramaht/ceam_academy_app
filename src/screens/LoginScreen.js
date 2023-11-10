@@ -9,28 +9,40 @@ import {
   Image,
   ScrollView,
   Pressable,
+  Icon
 } from "native-base";
+
+import { StyleSheet } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 import TextFieldStyled from "../components/ui/TextFieldStyled";
 import ButtonStyled from "../components/ui/ButtonStyled";
-import { StyleSheet, Dimensions } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import theme from "../utils/theme";
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from "../components/ui/DimensionScreeen";
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
-
-export default function LoginScreen({navigation}) {
+export default function LoginScreen({ navigation }) {
   const [pwd, setPwd] = useState(true);
   return (
-    <ScrollView width={"100%"} height={"100%"}>
-      <Box alignItems={"center"} justifyContent={"center"} my={5} bg={'#fff'}>
+    <ScrollView>
+      <Box size={"100%"} {...theme.container}>
         <Box>
-          <Center _text={{ fontWeight: "700", fontSize: 45, color: "#1D3A70" }}>
+          <Center
+            _text={{
+              fontWeight: "700",
+              fontSize: SCREEN_HEIGHT * 0.05,
+              color: "#1D3A70",
+            }}
+          >
             Bienvenido a
           </Center>
           <Center
-            top={-15}
-            _text={{ fontWeight: "700", fontSize: 40, color: "#3B78E7" }}
+            top={-12}
+            _text={{
+              fontWeight: "700",
+              fontSize: SCREEN_HEIGHT * 0.05,
+              color: "#3B78E7",
+            }}
           >
             CEAM
           </Center>
@@ -38,19 +50,17 @@ export default function LoginScreen({navigation}) {
         <Box>
           <Image
             source={require("../../assets/images/imgLogin.png")}
-            alt="Alternate Text"
-            width={370}
-            height={296.3}
+            alt="Image not Found"
+            h={SCREEN_HEIGHT * 0.3}
+            w={SCREEN_WIDTH * 0.9}
           />
         </Box>
         <Box
-          /*bg={'red.500'}*/
           marginTop={4}
-          width={361}
-          height={51}
+          w={SCREEN_WIDTH * 0.9}
           _text={{
             fontWeight: "400",
-            fontSize: 11,
+            fontSize: SCREEN_HEIGHT * 0.014,
             letterSpacing: 0.3,
             textAlign: "center",
             color: "#6B7280",
@@ -68,7 +78,7 @@ export default function LoginScreen({navigation}) {
           validationSchema={loginSchema}
         >
           {({}) => (
-            <VStack space={4} width={370} marginTop={4} /*bg={'blue.400'}*/>
+            <VStack space={4} w={SCREEN_WIDTH * 0.9} mt={4}>
               <FormControl>
                 <FormControl.Label _text={styles.label}>
                   Correo electrónico:
@@ -97,30 +107,31 @@ export default function LoginScreen({navigation}) {
                   borderWidth={0}
                   bg={"#F9FAFB"}
                   fontSize={16}
+                  InputRightElement={
+                    <Pressable onPress={() => setPwd(!pwd)}>
+                      <Icon
+                        as={
+                          <MaterialIcons
+                            name={pwd ? "visibility-off" : "visibility"}
+                          />
+                        }
+                        size={SCREEN_HEIGHT*0.03}
+                        mr="2"
+                        color="muted.400"
+                      />
+                    </Pressable>
+                  }
                 />
-                <Pressable
-                  onPress={() => setPwd(!pwd)}
-                  position={"absolute"}
-                  right={2}
-                  bottom={5}
-                >
-                  <FontAwesome
-                    name={pwd ? "eye" : "eye-slash"}
-                    size={windowHeight * 0.03}
-                    color="#6B7280"
-                  />
-                </Pressable>
               </FormControl>
-              <FormControl marginTop={2}>
+              <FormControl marginTop={9}>
                 <ButtonStyled
                   text={"Iniciar sessión"}
                   bg={{ linearGradient: styles.linearGradient }}
-                  alignItems={"center"}
-                  justifyContent={"center"}
+                  {...theme.container}
                   rounded={20}
-                  height={65}
+                  height={60}
                   _text={styles.buttonText}
-                  onPress={()=>navigation.navigate('OnboardingScreen')}
+                  onPress={() => navigation.navigate("OnboardingScreen")}
                 />
               </FormControl>
             </VStack>

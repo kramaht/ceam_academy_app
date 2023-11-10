@@ -5,6 +5,7 @@ import Constants from "expo-constants";
 import { NavigationContainer } from "@react-navigation/native";
 import { NativeBaseProvider } from "native-base";
 const LinearGradient = require("expo-linear-gradient").LinearGradient;
+
 const config = {
   dependencies: {
     "linear-gradient": LinearGradient,

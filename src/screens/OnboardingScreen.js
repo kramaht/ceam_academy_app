@@ -10,22 +10,24 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const Next = ({ isLight, ...props }) => (
-  <Box position={"absolute"} top={-windowWidth+280} left={windowWidth/2.4 *-1 }>
+  <Box
+    position={"absolute"}
+    top={-windowWidth + 280}
+    left={(windowWidth / 2.4) * -1}
+  >
     <ButtonStyled
       text={"Siguiente"}
       bg={{ linearGradient: styles.linearGradient }}
       alignItems={"center"}
       justifyContent={"center"}
-      rounded={20}
-      height={65}
-      width={201}
+      rounded={windowWidth * 0.05}
+      height={windowHeight * 0.08}
+      width={windowWidth * 0.6}
       _text={styles.buttonText}
       {...props}
     />
   </Box>
 );
-
-
 
 const Square = ({ isLight, selected }) => {
   let backgroundColor;
@@ -35,12 +37,7 @@ const Square = ({ isLight, selected }) => {
     backgroundColor = selected ? "rrgba(59,120,231,1)" : "rgba(59,120,231,0.5)";
   }
   return (
-    <Box      
-      top={-170}
-      height={44}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
+    <Box top={-170} height={44} justifyContent={"center"} alignItems={"center"}>
       <View
         style={{
           width: 9,
@@ -50,35 +47,45 @@ const Square = ({ isLight, selected }) => {
           marginHorizontal: 15,
         }}
       />
-    </Box>    
+    </Box>
   );
 };
 
-export default function OnboardingScreen({navigation}) {
-
+export default function OnboardingScreen({ navigation }) {
   const Done = ({ isLight, ...props }) => (
-    <Box position={"absolute"}  top={-windowWidth+280} left={windowWidth/2.4 *-1 }>
+    <Box
+      position={"absolute"}
+      top={-windowWidth + 280}
+      left={(windowWidth / 2.4) * -1}
+    >
       <ButtonStyled
         text={"Finalizar"}
         bg={{ linearGradient: styles.linearGradient }}
         alignItems={"center"}
         justifyContent={"center"}
-        rounded={20}
-        height={65}
-        width={201}
+        rounded={windowWidth * 0.05}
+        height={windowHeight * 0.08}
+        width={windowWidth * 0.6}
         _text={styles.buttonText}
-        onPress={()=>{navigation.navigate("HomeScreen")}}
+        onPress={() => {
+          navigation.navigate("RoutesScreen");
+        }}
       />
     </Box>
   );
 
-
-
   const Skip = ({ isLight }) => (
-    <Pressable  onPress={()=>{navigation.navigate('HomeScreen')}} position={'absolute'} top={windowHeight*-1+50} left={windowWidth-60}>
+    <Pressable
+      onPress={() => {
+        navigation.navigate("RoutesScreen");
+      }}
+      position={"absolute"}
+      top={windowHeight * -1 + 50}
+      left={windowWidth - 60}
+    >
       <Text
         style={{
-          fontSize: 18,          
+          fontSize: 18,
           letterSpacing: 0.3,
           color: "rgba(156, 163, 175, 1)",
         }}
@@ -90,12 +97,12 @@ export default function OnboardingScreen({navigation}) {
 
   return (
     <Box flex={1} position={"relative"}>
-      <Onboarding        
+      <Onboarding
         controlStatusBar={false}
         NextButtonComponent={Next}
         DoneButtonComponent={Done}
         SkipButtonComponent={Skip}
-        showSkip={true}
+        showSkip={false}
         DotComponent={Square}
         bottomBarColor="#fff"
         titleStyles={styles.textTitle}
